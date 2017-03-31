@@ -1,0 +1,17 @@
+Django==1.10.5
+appdirs==1.4.1
+django-allauth==0.30.0
+oauthlib==2.0.1
+packaging==16.8
+pyparsing==2.1.10
+python-openid==2.2.5
+six==1.10.0
+South==1.0
+dj-database-url==0.2.2
+dj-static==0.0.5
+gunicorn==18.0
+
+static==0.4
+wsgiref==0.1.2
+whitenoise==3.3.0
+
