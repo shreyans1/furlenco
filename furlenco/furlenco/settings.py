@@ -147,3 +147,4 @@ DEFAULT_FROM_EMAIL = "VPNSeva.com"
 SERVER_EMAIL = "VPNSseva.com"
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
+STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
