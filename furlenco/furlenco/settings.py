@@ -138,15 +138,14 @@ AUTHENTICATION_BACKENDS = (
 )
 SITE_ID = 1
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, 'static'),
     #'/var/www/static/',
 ]
 # Update database configuration with $DATABASE_URL.
 import os
 #BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-#DEBUG = False
-DEFAULT_FROM_EMAIL = "VPNSeva.com"
-SERVER_EMAIL = "VPNSseva.com"
+DEBUG = False
+
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
