@@ -569,69 +569,52 @@ body {
 }
 
 </style>
-<div class="app">
-  <input type="checkbox" id="play" checked="checked"/>
-  <div class="album"></div>
-  <div class="track">
-    <div class="progress"></div>
+
+
+<div class="infopanel" align="center ">
+  <h2>Welcome to Open Source MusicSeva</h2><br>
+<style>
+.button {
+    background-color: #008CBA; /* Green */
+    border-radius: 8px;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.button:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+.button123 {
+    text-align: center;
+}
+</style>
+<div class="button123">
+<a href="/create_playlist" class="button">Create your own playlist</a>
   </div>
-  <div class="title">Instant Crush <span class="artist">- Daft Punk</span></div>
-  <div class="throbber"></div>
-  <label class="play" for="play"></label>
-  <div class="controls">
-    <div class="control prev"></div>
-    <div class="control rw"></div>
-    <div class="control fw"></div>
-    <div class="control next"></div>
-  </div>
-  <ul class="songlist">
-    <li class="song">
-      <div class="name">My favorites</div>
-      <div class="artist">102 songs</div>
-    </li>
-    <li class="song">
-      <div class="cover"></div>
-      <div class="name">Song 1</div>
-      <div class="artist"> Daft Punk</div>
-    </li>
-    <li class="song">
-      <div class="cover"></div>
-      <div class="name">Song 2</div>
-      <div class="artist"> Daft Punk</div>
-    </li>
-    <li class="song">
-      <div class="cover"></div>
-      <div class="name">Song 3</div>
-      <div class="artist"> Daft Punk</div>
-    </li>
-    <li class="song">
-      <div class="cover"></div>
-      <div class="name">Song 4</div>
-      <div class="artist"> Daft Punk</div>
-    </li>
-    <li class="song">
-      <div class="cover"></div>
-      <div class="name">Song 5</div>
-      <div class="artist"> Daft Punk</div>
-    </li>
-    <li class="song">
-      <div class="cover"></div>
-      <div class="name">Song 6</div>
-      <div class="artist"> Daft Punk</div>
-    </li>
-    <li class="song">
-      <div class="cover"></div>
-      <div class="name">Song 7</div>
-      <div class="artist"> Daft Punk</div>
-    </li>
-  </ul>
-</div>
-<div class="infopanel">
-  <h2>Welcome to Open Source MusicSeva</h2>
   <p>
-{% for playlist in playlist_all %}
-      <li>{{ playlist.playlist_name }}</li>
-{% endfor %}
+
+<div class="card_layout_data">{% for playlist in playlist_all %}
+  <div class="hover-events-parent">
+
+
+    <a data-value="playlist4148160" data-type="play" data-pjax="" href="{{ playlist.playlist_name }}/" class="play"></a>
+    <a data-pjax="" href="/playlist/{{ playlist.playlist_name }}/" class="imghover">
+      <img title="{{ playlist.playlist_name }}" alt="{{ playlist.playlist_name }}"  width="30%" height="30%"  class="img" src="{{ playlist.playlist_img_link}}" data-src="{{ playlist.playlist_img_link}}" style="opacity: 1;"></a> </div> <div class="arwtork_label"> <a data-pjax="" href="/playlist/{{ playlist.playlist_name }}/" class="album-name block_dotes _dotes pjax" title="{{ playlist.playlist_name }}" >{{ playlist.playlist_name }}</a>
+
+        <a href="/playlist_delete/{{playlist.id}}/delete">Delete</a>
+
+
+</div>{% endfor %} </div>
+
+      <li></li>
+
 
     </p>
   <p></p>

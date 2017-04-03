@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
     'home',
+    'django_social_share'
     
 ]
 
@@ -148,3 +150,4 @@ SERVER_EMAIL = "VPNSseva.com"
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
+LOGIN_REDIRECT_URL = "/profile/"

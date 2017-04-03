@@ -1,0 +1,215 @@
+{% load social_share %}
+<style>
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: sans-serif;
+}
+
+body {
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2IzYjNiMyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzMzMzMzMyIgc3RvcC1vcGFjaXR5PSIwLjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #b3b3b3), color-stop(100%, rgba(51, 51, 51, 0)));
+  background-image: -webkit-linear-gradient(#b3b3b3, rgba(51, 51, 51, 0));
+  background-image: linear-gradient(#b3b3b3, rgba(51, 51, 51, 0));
+}
+
+.playlist {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 25em;
+  padding-top: 10em;
+  margin-top: 2em;
+  box-shadow: 0 0.25em 0.5em #333;
+  background: #fff url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/30354/tryout.jpg);
+  background-repeat: no-repeat;
+  -webkit-transition: padding .25s ease-in-out .25s;
+  transition: padding .25s ease-in-out .25s;
+}
+.is-active.playlist {
+  padding-top: 15em;
+  -webkit-transition: padding .25s ease-in-out;
+  transition: padding .25s ease-in-out;
+}
+
+.controls {
+  position: absolute;
+  top: 8.5em;
+  right: 1em;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  box-shadow: 0 0.25em 0.25em #333;
+  overflow: hidden;
+  -webkit-transition: border-radius .25s ease-in-out, top .25s ease-in-out .325s, box-shadow .25s ease-in-out .5s, height .25s ease-in-out .25s, right .25s ease-in-out .25s, width .25s ease-in-out .25s;
+  transition: border-radius .25s ease-in-out, top .25s ease-in-out .325s, box-shadow .25s ease-in-out .5s, height .25s ease-in-out .25s, right .25s ease-in-out .25s, width .25s ease-in-out .25s;
+}
+.is-active .controls {
+  top: 10em;
+  right: 0;
+  width: 100%;
+  height: 5em;
+  border-radius: 0;
+  box-shadow: none;
+  -webkit-transition: border-radius .25s ease-in-out, top .25s ease-in-out, box-shadow .25s ease-in-out, height .25s ease-in-out, right .25s ease-in-out .175s, width .25s ease-in-out .125s;
+  transition: border-radius .25s ease-in-out, top .25s ease-in-out, box-shadow .25s ease-in-out, height .25s ease-in-out, right .25s ease-in-out .175s, width .25s ease-in-out .125s;
+}
+.controls::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3em;
+  height: 3em;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  border-radius: 50%;
+  content: '';
+  background: #4db6ac;
+  -webkit-transition: width .25s ease-in-out, height .25s ease-in-out;
+  transition: width .25s ease-in-out, height .25s ease-in-out;
+}
+.is-active .controls::before {
+  width: 30em;
+  height: 10em;
+  -webkit-transition: all .25s ease-in-out .25s;
+  transition: all .25s ease-in-out .25s;
+}
+.controls--play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%) rotate(0);
+          transform: translate(-50%, -50%) rotate(0);
+  background: none;
+  border: none;
+  font-size: 1em;
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+  padding-top: 3em;
+  height: 3em;
+  width: 3em;
+}
+.controls--play:hover::before {
+  border-color: transparent transparent transparent #35817a;
+}
+.controls--play:active::before {
+  border-color: transparent transparent transparent #173936;
+}
+.controls--play::before {
+  position: absolute;
+  top: .875em;
+  left: 1em;
+  border-style: solid;
+  border-width: .625em 0 .625em 1.25em;
+  border-color: transparent transparent transparent #1f4b47;
+  content: '';
+}
+.controls--prev, .controls--next {
+  position: absolute;
+  background: none;
+  border: 0;
+  top: 50%;
+  opacity: 0;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  -webkit-transition: opacity .25s ease-in-out;
+  transition: opacity .25s ease-in-out;
+}
+.is-active .controls--prev, .is-active .controls--next {
+  opacity: 1;
+  -webkit-transition: opacity .25s ease-in-out .25s;
+  transition: opacity .25s ease-in-out .25s;
+}
+.controls--prev {
+  left: 10em;
+}
+.controls--next {
+  right: 10em;
+}
+
+.song {
+  background: #2c556c;
+  color: #fff;
+}
+.song--headline {
+  padding: 1.5em 2.75em;
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: 400;
+  -webkit-transition: padding .25s ease-in-out .25s, font-size .25s ease-in-out .25s;
+  transition: padding .25s ease-in-out .25s, font-size .25s ease-in-out .25s;
+}
+.is-active .song--headline {
+  padding: 1em 4em;
+  font-size: 1em;
+  -webkit-transition: padding .25s ease-in-out .125s, font-size .25s ease-in-out .125s;
+  transition: padding .25s ease-in-out .125s, font-size .25s ease-in-out .125s;
+}
+.song--list {
+  background: #fff;
+  color: #2c556c;
+  list-style: none;
+  margin: 0;
+  padding: 1em 4em;
+}
+.song--list > li {
+  padding: 0.5em 0;
+}
+
+</style>
+
+
+<main class="playlist">
+  <div class="controls">
+    <button type="button" class="controls--prev">Prev</button>
+
+
+
+    <button type="button" class="controls--next">Next</button>
+  </div>
+  <div class="song">
+    <h1 class="song--headline">{{playlist_details}}</h1>
+    {% post_to_facebook object_or_url "Share with Friends on Facebook!" %}
+      <style>
+.button {
+    background-color: #008CBA; /* Green */
+    border-radius: 8px;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.button:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+.button123 {
+    text-align: center;
+}
+</style>
+<div class="button123">
+<a href="song_add" class="button">Add song</a>
+  <a href="/playlist_edit/{{playlist_details.id}}/edit" class="button">Edit Playlist</a>
+  </div>
+
+    <ol class="song--list">
+      {% for songs in songs %}
+
+{% if songs.playlist_song == playlist_details.playlist_name %}
+<li>{{songs.song_name}}           <a href ="{{songs.song_link}}"class="song_play" >Play</a><p>              </p><a href="/{{songs.id}}/delete">Delete</a>
+{% endif %}
+{% endfor %}
+
+    </ol>
+  </div>
+</main>

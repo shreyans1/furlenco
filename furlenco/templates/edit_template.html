@@ -170,18 +170,18 @@ input:focus, textarea:focus {
 </style>
 <div id="form-main">
   <div id="form-div">
-    <form class="form" id="form1" action="/profile/" method="post">
+    <form class="form" id="form1" action="/playlist_edit/{{playlist_id}}/edit" method="post">
 
 {% csrf_token %}
      <p class="name">
-        <input name="playlist_name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Playlist_Name " id="playlist_name" />
+        <input name="playlist_name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Playlist_Name " id="playlist_name" value = "{{object.playlist_name}}"/>
       </p>
 
       <p class="name">
-        <input name="playlist_tag" type="text"  class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" id="playlist_tag" placeholder="Playlist_tag" />
+        <input name="playlist_tag" type="text"  class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" id="playlist_tag" placeholder="Playlist_tag" value = "{{object.playlist_tag}}" />
       </p>
         <p class="name">
-        <input name="playlist_img_link" type="text"  class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" id="playlist_img_link" placeholder="Playlist Album Art Link" />
+        <input name="playlist_img_link" type="text"  class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" id="playlist_img_link" placeholder="Playlist Album Art Link" value = "{{object.playlist_img_link}}"/>
       </p>
 
       <div class="submit">

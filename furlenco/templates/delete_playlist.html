@@ -1,0 +1,6 @@
+<h1>Are you sure to delete this playlist?</h1>
+<form method="POST" action="/playlist_delete/{{playlist_id}}/delete">
+    {% csrf_token %}
+<button type="submit" value="Delete">Delete</button>
+
+</form>
